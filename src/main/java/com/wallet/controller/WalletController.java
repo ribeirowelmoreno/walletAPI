@@ -38,7 +38,7 @@ public class WalletController {
 		response.setData(this.convertEntityToDTO(w));
 		
 		return ResponseEntity.ok().body(response);
-	}
+	}	
 	
 	private Wallet convertDtoToEntity(WalletDTO dto) {
 		Wallet w = new Wallet();
