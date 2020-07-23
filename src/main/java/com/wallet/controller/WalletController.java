@@ -3,6 +3,7 @@ package com.wallet.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ import com.wallet.response.Response;
 import com.wallet.service.WalletService;
 
 @RestController
-@RequestMapping("wallet")
+@RequestMapping("wallet")	
 public class WalletController {
 	
 	@Autowired
@@ -35,9 +36,9 @@ public class WalletController {
 		
 		Wallet w = service.save(this.convertDtoToEntity(dto));
 		
-		response.setData(this.convertEntityToDTO(w));
+		response.setData(this.convertEntityToDto(w));
 		
-		return ResponseEntity.ok().body(response);
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}	
 	
 	private Wallet convertDtoToEntity(WalletDTO dto) {
@@ -49,7 +50,7 @@ public class WalletController {
 		return w;
 	}
 	
-	private WalletDTO convertEntityToDTO(Wallet w) {
+	private WalletDTO convertEntityToDto(Wallet w) {
 		WalletDTO dto = new WalletDTO();
 		dto.setId(w.getId());
 		dto.setName(w.getName());
